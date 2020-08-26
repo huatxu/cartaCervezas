@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Dots } from "react-activity";
 import GetSheetDone from "get-sheet-done";
 import "./App.css";
 
