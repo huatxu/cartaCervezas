@@ -1,29 +1,77 @@
 .App {
+  background-color: #343131;
+  align-items: center;
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+  display: flex;
+  flex-direction: column;
+  font-family: "Montserrat", sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background-color: #343131;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #414141;
 }
 
+.App-header img {
+  max-height: 100px;
+}
+.beer-card p {
+  font-size: 75%;
+}
+
+.beer-card {
+  background-color: #fff;
+  box-shadow: 2px 2px 1px rgba(78, 78, 78, 0.5);
+  align-self: center;
+  border-radius: 13px;
+  padding: 10px;
+  line-height: 5px;
+  text-align: left;
+  max-height: 110px;
+  position: relative;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  margin-top: 20px;
+  overflow: hidden;
+}
+.beer-card.active {
+  max-height: 2000px;
+}
+.beer-card .content {
+  z-index: 10;
+  position: relative;
+}
+.beer-card .title {
+  font-family: "Staatliches", cursive;
+}
+
+@media (max-width: 320px) {
+  .beer-card img {
+    max-width: 140px;
+    max-height: 140px;
+  }
+}
+
+@media (max-width: 720px) {
+  .beer-card {
+    width: 84%;
+  }
+}
+@media (min-width: 720px) {
+  .beer-card {
+    width: 600px;
+  }
+}
 .App-link {
   color: #61dafb;
 }
