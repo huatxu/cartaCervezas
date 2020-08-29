@@ -6,7 +6,7 @@ function App() {
   return (
     <div className='App'>
       <header className='App-header'>
-        <img src={require("./logo.png")} />
+        <img src={require("./logo.png")} alt='Erasmus Café' />
       </header>
       <ListaCervezas />
     </div>
@@ -39,14 +39,34 @@ function ListaCervezas(props) {
       })
     );
   };
-  return cervezas.map((e) => {
+  const tiposDeCerveza = [...new Set(cervezas.map((e) => e.tipo))];
+  return tiposDeCerveza.map((tipo) => {
     return (
-      <Cerveza
-        key={e.nombre}
-        info={e}
-        active={e.active}
-        handleClick={handleClick}
-      />
+      <>
+        <h2
+          style={{
+            color: "#fff",
+            fontFamily: "Staatliches, cursive",
+            fontSize: 35,
+            marginBottom: 0,
+            marginTop: 40,
+          }}
+          key={tipo}>
+          {tipo}
+        </h2>
+        {cervezas
+          .filter((e) => e.tipo === tipo)
+          .map((y) => {
+            return (
+              <Cerveza
+                key={y.nombre}
+                info={y}
+                active={y.active}
+                handleClick={handleClick}
+              />
+            );
+          })}
+      </>
     );
   });
 }
@@ -63,7 +83,12 @@ function Cerveza(props) {
         {!props.active && (
           <>
             <p>{props.info.alcoholenvolumen} alcohol en volumen</p>
-            <p style={{ fontWeight: "bold" }}>{props.info.precio}</p>
+            <p>
+              <span style={{ fontWeight: "bold" }}>{props.info.precio} </span>
+              <span style={{ color: "grey", fontSize: "85%" }}>
+                {props.info.formato && props.info.formato}
+              </span>
+            </p>
           </>
         )}
       </div>
@@ -81,14 +106,18 @@ function Cerveza(props) {
               <span style={{ fontWeight: "bold" }}>Alcohol </span>
               {props.info.alcoholenvolumen}
             </p>
-            <p>
-              <span style={{ fontWeight: "bold" }}>Color</span>{" "}
-              {props.info.color}
-            </p>
-            <p>
-              <span style={{ fontWeight: "bold" }}>Amargor</span>{" "}
-              {props.info.amargor}
-            </p>
+            {props.info.color && (
+              <p>
+                <span style={{ fontWeight: "bold" }}>Color</span>{" "}
+                {props.info.color}
+              </p>
+            )}
+            {props.info.amargor && (
+              <p>
+                <span style={{ fontWeight: "bold" }}>Amargor</span>{" "}
+                {props.info.amargor}
+              </p>
+            )}
           </div>
         </>
       )}
@@ -155,8 +184,13 @@ function Cerveza(props) {
                 <span style={{ color: "#B10D0D" }}>No</span>
               )}
             </p>
-            <p style={{ fontWeight: "bold", fontSize: "14px" }}>
-              {props.info.precio}
+            <p>
+              <span style={{ fontWeight: "bold", fontSize: "14px" }}>
+                {props.info.precio}{" "}
+              </span>
+              <span style={{ color: "grey", fontSize: "85%" }}>
+                {props.info.formato && props.info.formato}
+              </span>
             </p>
           </div>
         </>
