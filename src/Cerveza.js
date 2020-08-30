@@ -87,7 +87,9 @@ export function Cerveza(props) {
             {props.info.descripcion && (
               <div>
                 <p style={{ fontWeight: "bold" }}>
-                  {!props.ingles ? "Notas" : "Description"}
+                  {!props.ingles
+                    ? "Notas"
+                    : props.info.descripcioningles && "Description"}
                 </p>
                 <p
                   style={{
