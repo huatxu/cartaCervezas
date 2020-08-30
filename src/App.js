@@ -3,6 +3,7 @@ import "./App.css";
 import { FiltroCervezas } from "./FiltroCervezas";
 import { SelectorIdioma } from "./SelectorIdioma";
 import { ListaCervezas } from "./ListaCervezas";
+import AddToHomeScreen from "add-to-homescreen-react";
 
 function App() {
   const [ingles, setIngles] = useState(false);
@@ -14,6 +15,8 @@ function App() {
         <img src={require("./logo.png")} alt='Erasmus Café' />
       </header>
       <SelectorIdioma handleClick={setIngles} ingles={ingles} />
+      <AddToHomeScreen />
+
       <FiltroCervezas
         handleClick={setArtesanales}
         artesanales={artesanales}
