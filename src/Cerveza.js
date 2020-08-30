@@ -17,7 +17,9 @@ export function Cerveza(props) {
             <p>
               <span style={{ fontWeight: "bold" }}>{props.info.precio} </span>
               <span style={{ color: "grey", fontSize: "85%" }}>
-                {props.info.formato && props.info.formato}
+                {props.info.formato && !props.ingles
+                  ? props.info.formato.trim().split("-")[0]
+                  : props.info.formato.trim().split("-")[1]}
               </span>
             </p>
           </>
@@ -84,14 +86,18 @@ export function Cerveza(props) {
           <div style={{ lineHeight: "15px", textAlign: "center" }}>
             {props.info.descripcion && (
               <div>
-                <p style={{ fontWeight: "bold" }}>Notas</p>
+                <p style={{ fontWeight: "bold" }}>
+                  {!props.ingles ? "Notas" : "Description"}
+                </p>
                 <p
                   style={{
                     lineHeight: "1.5em",
                     marginRight: 15,
                     marginLeft: 15,
                   }}>
-                  {props.info.descripcion}
+                  {!props.ingles
+                    ? props.info.descripcion
+                    : props.info.descripcioningles}
                 </p>
               </div>
             )}
@@ -118,7 +124,9 @@ export function Cerveza(props) {
                 {props.info.precio}{" "}
               </span>
               <span style={{ color: "grey", fontSize: "85%" }}>
-                {props.info.formato && props.info.formato}
+                {props.info.formato && !props.ingles
+                  ? props.info.formato.trim().split("-")[0]
+                  : props.info.formato.trim().split("-")[1]}
               </span>
             </p>
           </div>

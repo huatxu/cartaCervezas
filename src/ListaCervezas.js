@@ -48,7 +48,9 @@ export function ListaCervezas(props) {
               marginTop: 20,
             }}
             key={tipo}>
-            {tipo}
+            {!props.ingles
+              ? tipo.split("-")[0].trim()
+              : tipo.split("-")[1].trim()}
           </h2>
         )}
         {cervezas

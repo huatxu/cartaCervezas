@@ -14,6 +14,7 @@ export function SelectorIdioma(props) {
                 borderRadius: "4px 0px 0px 4px",
                 paddingRight: 15,
                 paddingLeft: 15,
+                cursor: "pointer",
               }
             : {
                 color: "white",
@@ -24,6 +25,7 @@ export function SelectorIdioma(props) {
                 borderRadius: "4px 0px 0px 4px",
                 paddingRight: 15,
                 paddingLeft: 15,
+                cursor: "pointer",
               }
         }
         onClick={() => props.handleClick(false)}>
@@ -41,6 +43,7 @@ export function SelectorIdioma(props) {
                 borderRadius: "0px 4px 4px 0px",
                 paddingRight: 15,
                 paddingLeft: 15,
+                cursor: "pointer",
               }
             : {
                 color: "white",
@@ -51,6 +54,7 @@ export function SelectorIdioma(props) {
                 borderRadius: "0px 4px 4px 0px",
                 paddingRight: 15,
                 paddingLeft: 15,
+                cursor: "pointer",
               }
         }
         onClick={() => props.handleClick(true)}>
