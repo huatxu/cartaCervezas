@@ -29,7 +29,7 @@ export function SelectorIdioma(props) {
               }
         }
         onClick={() => props.handleClick(false)}>
-        Español
+        🇪🇸 Español
       </span>
       <span
         style={
@@ -58,7 +58,7 @@ export function SelectorIdioma(props) {
               }
         }
         onClick={() => props.handleClick(true)}>
-        English
+        English 🌍
       </span>
     </div>
   );

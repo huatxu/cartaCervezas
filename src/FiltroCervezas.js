@@ -31,6 +31,7 @@ export function FiltroCervezas(props) {
         onClick={() => props.handleClick(false)}>
         {props.ingles ? "🔩 Mass produced" : "🔩 Industriales"}
       </span>
+
       <span
         style={
           props.artesanales
