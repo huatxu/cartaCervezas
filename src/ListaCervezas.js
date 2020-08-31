@@ -81,12 +81,13 @@ export function ListaCervezas(props) {
                         paddingLeft: 10,
                         paddingRight: 10,
                         borderRadius: 5,
+                        cursor: "pointer",
                       }
                 }
                 onClick={() => handleCategoryClick(tipo)}
                 key={tipo}>
-                {tipo.split("-").length > 1
-                  ? !props.ingles && props.tipo
+                {tipo && tipo.split("-").length > 1
+                  ? !props.ingles
                     ? tipo.split("-")[0].trim()
                     : tipo.split("-")[1].trim()
                   : tipo.trim()}
@@ -94,45 +95,52 @@ export function ListaCervezas(props) {
             )
         )}
       </div>
-      {categoriaSeleccionada === "" &&
-        cervezas.filter((e) => e.recomendada !== "No").length > 0 && (
-          <>
-            {props.ingles ? (
-              <h2
-                style={{
-                  color: "#fff",
-                  fontFamily: "Staatliches, sans-serif",
-                  fontSize: 26,
-                  marginBottom: 0,
-                  marginTop: 20,
-                }}>
-                Today we suggest
-              </h2>
-            ) : (
-              <h2
-                style={{
-                  color: "#fff",
-                  fontFamily: "Staatliches, sans-serif",
-                  fontSize: 26,
-                  marginBottom: 0,
-                  marginTop: 20,
-                }}>
-                Hoy te recomendamos
-              </h2>
-            )}
-            {cervezas
-              .filter((e) => e.recomendada !== "No")
-              .map((y) => (
-                <Cerveza
-                  key={y.nombre}
-                  info={y}
-                  active={y.active}
-                  ingles={props.ingles}
-                  handleClick={handleClick}
-                />
-              ))}
-          </>
-        )}
+      {((categoriaSeleccionada === "" &&
+        cervezas.filter((e) => e.recomendada !== "No").length > 0) ||
+        cervezas
+          .filter((e) => e.tipo === categoriaSeleccionada)
+          .filter(
+            (e) =>
+              (e.artesanal !== "No" && props.artesanales) ||
+              (e.artesanal === "No" && !props.artesanales)
+          ).length === 0) && (
+        <>
+          {props.ingles ? (
+            <h2
+              style={{
+                color: "#fff",
+                fontFamily: "Staatliches, sans-serif",
+                fontSize: 26,
+                marginBottom: 0,
+                marginTop: 20,
+              }}>
+              Today we suggest
+            </h2>
+          ) : (
+            <h2
+              style={{
+                color: "#fff",
+                fontFamily: "Staatliches, sans-serif",
+                fontSize: 26,
+                marginBottom: 0,
+                marginTop: 20,
+              }}>
+              Hoy te recomendamos
+            </h2>
+          )}
+          {cervezas
+            .filter((e) => e.recomendada !== "No")
+            .map((y) => (
+              <Cerveza
+                key={y.nombre}
+                info={y}
+                active={y.active}
+                ingles={props.ingles}
+                handleClick={handleClick}
+              />
+            ))}
+        </>
+      )}
       {tiposDeCerveza.map((tipo) => {
         return cervezas
           .filter((e) => e.tipo === tipo)
