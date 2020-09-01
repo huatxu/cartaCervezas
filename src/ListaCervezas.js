@@ -97,7 +97,7 @@ export function ListaCervezas(props) {
         {
           <h2
             style={
-              "Barril" === categoriaSeleccionada
+              "Barril-Draft" === categoriaSeleccionada
                 ? {
                     display: "flex",
                     color: "#fff",
@@ -129,7 +129,7 @@ export function ListaCervezas(props) {
                     cursor: "pointer",
                   }
             }
-            onClick={() => handleCategoryClick("Barril")}>
+            onClick={() => handleCategoryClick("Barril-Draft")}>
             {!props.ingles ? "Barril" : "Draft"}
             <img
               src={require("./barril.png")}
@@ -171,6 +171,7 @@ export function ListaCervezas(props) {
               Hoy te recomendamos
             </h2>
           )}
+
           {cervezas
             .filter((e) => e.recomendada !== "No")
             .map((y) => (
@@ -184,13 +185,28 @@ export function ListaCervezas(props) {
             ))}
         </>
       )}
+      {categoriaSeleccionada !== "" && (
+        <h2
+          style={{
+            color: "#fff",
+            fontFamily: "Staatliches, sans-serif",
+            fontSize: 28,
+            marginBottom: 10,
+            marginTop: 20,
+          }}>
+          {props.ingles
+            ? categoriaSeleccionada.split("-")[1].trim()
+            : categoriaSeleccionada.split("-")[0].trim()}
+        </h2>
+      )}
       {tiposDeCerveza.map((tipo) => {
         return cervezas
           .filter((e) => e.tipo === tipo)
           .filter(
             (e) =>
               (e.artesanal !== "No" && props.artesanales) ||
-              (e.artesanal === "No" && !props.artesanales)
+              (e.artesanal === "No" && !props.artesanales) ||
+              categoriaSeleccionada === "Barril"
           )
           .filter((e) => categoriaSeleccionada === tipo)
           .map((y) => {
