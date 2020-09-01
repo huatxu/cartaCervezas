@@ -1,4 +1,6 @@
 import React from "react";
+import { Emojione } from "react-emoji-render";
+
 export function FiltroCervezas(props) {
   return (
     <div style={{ margin: 20 }}>
@@ -29,7 +31,9 @@ export function FiltroCervezas(props) {
               }
         }
         onClick={() => props.handleClick(false)}>
-        {props.ingles ? "🔩 Mass produced" : "🔩 Industriales"}
+        <Emojione
+          text={props.ingles ? "🔩 Mass produced" : "🔩 Industriales"}
+        />
       </span>
 
       <span
@@ -59,7 +63,7 @@ export function FiltroCervezas(props) {
               }
         }
         onClick={() => props.handleClick(true)}>
-        {props.ingles ? "Craft 🔨" : "Artesanales 🔨"}
+        <Emojione text={props.ingles ? "Craft 🔨" : "Artesanales 🔨"} />
       </span>
     </div>
   );

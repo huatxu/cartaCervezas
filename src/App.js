@@ -20,7 +20,6 @@ function App() {
         artesanales={artesanales}
         ingles={ingles}
       />
-
       <ListaCervezas ingles={ingles} artesanales={artesanales} />
       <div
         style={{
@@ -40,8 +39,10 @@ function App() {
             fontSize: 11,
             lineBreak: 0,
           }}>
-          <span style={{ fontWeight: "bold" }}>Erasmus Bruin Café</span> ©{" "}
-          {new Date().getFullYear()}
+          <span style={{ fontWeight: "bold", color: "#919191" }}>
+            Erasmus Bruin Café
+          </span>{" "}
+          © {new Date().getFullYear()}
         </p>
         <p style={{ color: "white", fontSize: 11, lineHeight: 0 }}>
           Calle Meléndez, 7, Salamanca

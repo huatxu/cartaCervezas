@@ -10,6 +10,7 @@
     "get-sheet-done": "^0.1.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-emoji-render": "^1.2.4",
     "react-scripts": "3.4.3"
   },
   "scripts": {

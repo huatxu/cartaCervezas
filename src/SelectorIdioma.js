@@ -1,4 +1,6 @@
 import React from "react";
+import { Emojione } from "react-emoji-render";
+
 export function SelectorIdioma(props) {
   return (
     <div
@@ -24,9 +26,9 @@ export function SelectorIdioma(props) {
           style={{
             color: "white",
             fontSize: 15,
-            marginTop: 5,
+            marginTop: 7,
           }}>
-          🇪🇸
+          <Emojione text='🇪🇸' />
         </span>
       ) : (
         <span
@@ -34,9 +36,9 @@ export function SelectorIdioma(props) {
             top: 20,
             color: "white",
             fontSize: 15,
-            marginTop: 5,
+            marginTop: 7,
           }}>
-          🌍
+          <Emojione text='🌍' />
         </span>
       )}
     </div>

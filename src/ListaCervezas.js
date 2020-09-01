@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import GetSheetDone from "get-sheet-done";
 import { Cerveza } from "./Cerveza";
+import { Emojione } from "react-emoji-render";
+
 export function ListaCervezas(props) {
   const [cervezas, setCervezas] = useState([]);
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("");
@@ -57,6 +59,7 @@ export function ListaCervezas(props) {
                 style={
                   tipo === categoriaSeleccionada
                     ? {
+                        display: "flex",
                         color: "#fff",
                         fontFamily: "Staatliches, sans-serif",
                         fontSize: 23,
@@ -66,10 +69,12 @@ export function ListaCervezas(props) {
                         lineHeight: 1.5,
                         margin: 4,
                         paddingLeft: 10,
-                        paddingRight: 10,
+                        paddingRight: tipo === "Barril-Draft" ? 0 : 10,
                         borderRadius: 5,
+                        justifyContent: "center",
                       }
                     : {
+                        display: "flex",
                         color: "#fff",
                         fontFamily: "Staatliches, sans-serif",
                         fontSize: 23,
@@ -79,7 +84,7 @@ export function ListaCervezas(props) {
                         lineHeight: 1.5,
                         margin: 4,
                         paddingLeft: 10,
-                        paddingRight: 10,
+                        paddingRight: tipo === "Barril-Draft" ? 0 : 10,
                         borderRadius: 5,
                         cursor: "pointer",
                       }
@@ -91,52 +96,15 @@ export function ListaCervezas(props) {
                     ? tipo.split("-")[0].trim()
                     : tipo.split("-")[1].trim()
                   : tipo.trim()}
+                {tipo === "Barril-Draft" && (
+                  <img
+                    src={require("./barril.png")}
+                    style={{ height: 30, alignSelf: "center" }}
+                  />
+                )}
               </h2>
             )
         )}
-        {
-          <h2
-            style={
-              "Barril-Draft" === categoriaSeleccionada
-                ? {
-                    display: "flex",
-                    color: "#fff",
-                    fontFamily: "Staatliches, sans-serif",
-                    fontSize: 23,
-                    marginBottom: 0,
-                    marginTop: 20,
-                    backgroundColor: "rgba(110, 110, 110, 1)",
-                    lineHeight: 1.5,
-                    margin: 4,
-                    paddingLeft: 10,
-                    paddingRight: 0,
-                    borderRadius: 5,
-                  }
-                : {
-                    display: "flex",
-
-                    color: "#fff",
-                    fontFamily: "Staatliches, sans-serif",
-                    fontSize: 23,
-                    marginBottom: 0,
-                    marginTop: 20,
-                    backgroundColor: "rgba(64, 64, 64, 1)",
-                    lineHeight: 1.5,
-                    margin: 4,
-                    paddingLeft: 10,
-                    paddingRight: 0,
-                    borderRadius: 5,
-                    cursor: "pointer",
-                  }
-            }
-            onClick={() => handleCategoryClick("Barril-Draft")}>
-            {!props.ingles ? "Barril" : "Draft"}
-            <img
-              src={require("./barril.png")}
-              style={{ height: 30, alignSelf: "center" }}
-            />
-          </h2>
-        }
       </div>
       {((categoriaSeleccionada === "" &&
         cervezas.filter((e) => e.recomendada !== "No").length > 0) ||
@@ -185,20 +153,27 @@ export function ListaCervezas(props) {
             ))}
         </>
       )}
-      {categoriaSeleccionada !== "" && (
-        <h2
-          style={{
-            color: "#fff",
-            fontFamily: "Staatliches, sans-serif",
-            fontSize: 28,
-            marginBottom: 10,
-            marginTop: 20,
-          }}>
-          {props.ingles
-            ? categoriaSeleccionada.split("-")[1].trim()
-            : categoriaSeleccionada.split("-")[0].trim()}
-        </h2>
-      )}
+      {categoriaSeleccionada !== "" &&
+        cervezas
+          .filter((e) => e.tipo === categoriaSeleccionada)
+          .filter(
+            (e) =>
+              (e.artesanal !== "No" && props.artesanales) ||
+              (e.artesanal === "No" && !props.artesanales)
+          ).length > 0 && (
+          <h2
+            style={{
+              color: "#fff",
+              fontFamily: "Staatliches, sans-serif",
+              fontSize: 28,
+              marginBottom: 10,
+              marginTop: 20,
+            }}>
+            {props.ingles
+              ? categoriaSeleccionada.split("-")[1].trim()
+              : categoriaSeleccionada.split("-")[0].trim()}
+          </h2>
+        )}
       {tiposDeCerveza.map((tipo) => {
         return cervezas
           .filter((e) => e.tipo === tipo)
@@ -212,7 +187,7 @@ export function ListaCervezas(props) {
           .map((y) => {
             return (
               <Cerveza
-                key={y.nombre}
+                key={y.nombre + y.tipo}
                 info={y}
                 active={y.active}
                 ingles={props.ingles}
