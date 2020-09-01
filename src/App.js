@@ -9,7 +9,7 @@ function App() {
   const [artesanales, setArtesanales] = useState(false);
 
   return (
-    <div className='App'>
+    <div className={"App"}>
       <header className='App-header'>
         <img src={require("./logo.png")} alt='Erasmus Café' />
       </header>
@@ -22,19 +22,31 @@ function App() {
       />
 
       <ListaCervezas ingles={ingles} artesanales={artesanales} />
-      <p
+      <div
         style={{
           color: "white",
           fontSize: 11,
-          marginTop: 40,
           lineBreak: 0,
+          justifySelf: "flex-end",
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-end",
+          marginTop: 20,
         }}>
-        <span style={{ fontWeight: "bold" }}>Erasmus Bruin Café</span> ©{" "}
-        {new Date().getFullYear()}
-      </p>
-      <p style={{ color: "white", fontSize: 11, lineHeight: 0 }}>
-        Calle Meléndez, 7, Salamanca
-      </p>
+        <p
+          style={{
+            color: "white",
+            fontSize: 11,
+            lineBreak: 0,
+          }}>
+          <span style={{ fontWeight: "bold" }}>Erasmus Bruin Café</span> ©{" "}
+          {new Date().getFullYear()}
+        </p>
+        <p style={{ color: "white", fontSize: 11, lineHeight: 0 }}>
+          Calle Meléndez, 7, Salamanca
+        </p>
+      </div>
     </div>
   );
 }

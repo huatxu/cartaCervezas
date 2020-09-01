@@ -62,7 +62,7 @@ export function ListaCervezas(props) {
                         fontSize: 23,
                         marginBottom: 0,
                         marginTop: 20,
-                        backgroundColor: "rgba(0, 0, 0, 1)",
+                        backgroundColor: "rgba(110, 110, 110, 1)",
                         lineHeight: 1.5,
                         margin: 4,
                         paddingLeft: 10,
@@ -75,7 +75,7 @@ export function ListaCervezas(props) {
                         fontSize: 23,
                         marginBottom: 0,
                         marginTop: 20,
-                        backgroundColor: "rgba(0, 0, 0, 0.2)",
+                        backgroundColor: "rgba(64, 64, 64, 1)",
                         lineHeight: 1.5,
                         margin: 4,
                         paddingLeft: 10,
@@ -94,6 +94,49 @@ export function ListaCervezas(props) {
               </h2>
             )
         )}
+        {
+          <h2
+            style={
+              "Barril" === categoriaSeleccionada
+                ? {
+                    display: "flex",
+                    color: "#fff",
+                    fontFamily: "Staatliches, sans-serif",
+                    fontSize: 23,
+                    marginBottom: 0,
+                    marginTop: 20,
+                    backgroundColor: "rgba(110, 110, 110, 1)",
+                    lineHeight: 1.5,
+                    margin: 4,
+                    paddingLeft: 10,
+                    paddingRight: 0,
+                    borderRadius: 5,
+                  }
+                : {
+                    display: "flex",
+
+                    color: "#fff",
+                    fontFamily: "Staatliches, sans-serif",
+                    fontSize: 23,
+                    marginBottom: 0,
+                    marginTop: 20,
+                    backgroundColor: "rgba(64, 64, 64, 1)",
+                    lineHeight: 1.5,
+                    margin: 4,
+                    paddingLeft: 10,
+                    paddingRight: 0,
+                    borderRadius: 5,
+                    cursor: "pointer",
+                  }
+            }
+            onClick={() => handleCategoryClick("Barril")}>
+            {!props.ingles ? "Barril" : "Draft"}
+            <img
+              src={require("./barril.png")}
+              style={{ height: 30, alignSelf: "center" }}
+            />
+          </h2>
+        }
       </div>
       {((categoriaSeleccionada === "" &&
         cervezas.filter((e) => e.recomendada !== "No").length > 0) ||
