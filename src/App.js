@@ -12,6 +12,16 @@ function App() {
     <div className={"App"}>
       <header className='App-header'>
         <img src={require("./logo.png")} alt='Erasmus Café' />
+        <h2
+          style={{
+            color: "#fff",
+            fontFamily: "Staatliches, sans-serif",
+            fontSize: 35,
+            marginBottom: 0,
+            marginTop: 20,
+          }}>
+          Carta de cervezas
+        </h2>
       </header>
       <SelectorIdioma handleClick={setIngles} ingles={ingles} />
 

@@ -10,7 +10,7 @@ export function SelectorIdioma(props) {
         flexDirection: "column",
         position: "absolute",
         top: 0,
-        right: 0,
+        right: -10,
         backgroundColor: "rgb(89 89 89)",
         cursor: "pointer",
         borderRadius: "7px",

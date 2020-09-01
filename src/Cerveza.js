@@ -179,6 +179,7 @@ export function Cerveza(props) {
                       fontWeight: "bold",
                       fontSize: "14px",
                       textAlign: "center",
+                      lineHeight: 1,
                     }}>
                     {props.info.precio}
                   </p>
@@ -213,6 +214,7 @@ export function Cerveza(props) {
                         color: "grey",
                         fontSize: 11,
                         textAlign: "center",
+                        lineHeight: 1,
                       }}>
                       {props.info.formato2 && !props.ingles
                         ? props.info.formato2.trim().split("-")[0]

@@ -121,9 +121,11 @@ export function ListaCervezas(props) {
               style={{
                 color: "#fff",
                 fontFamily: "Staatliches, sans-serif",
-                fontSize: 26,
+                fontSize: 28,
                 marginBottom: 0,
+                minWidth: "150px",
                 marginTop: 20,
+                borderBottom: "3px dashed rgba(0, 0, 0, 0.3)",
               }}>
               Today we suggest
             </h2>
@@ -132,9 +134,11 @@ export function ListaCervezas(props) {
               style={{
                 color: "#fff",
                 fontFamily: "Staatliches, sans-serif",
-                fontSize: 26,
+                fontSize: 28,
                 marginBottom: 0,
                 marginTop: 20,
+                minWidth: "150px",
+                borderBottom: "3px dashed rgba(0, 0, 0, 0.3)",
               }}>
               Hoy te recomendamos
             </h2>
@@ -168,6 +172,8 @@ export function ListaCervezas(props) {
               fontSize: 28,
               marginBottom: 10,
               marginTop: 20,
+              borderBottom: "3px dashed rgba(0, 0, 0, 0.3)",
+              minWidth: "150px",
             }}>
             {props.ingles
               ? categoriaSeleccionada.split("-")[1].trim()
