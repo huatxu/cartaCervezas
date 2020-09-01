@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import GetSheetDone from "get-sheet-done";
 import { Cerveza } from "./Cerveza";
-import { Emojione } from "react-emoji-render";
 
 export function ListaCervezas(props) {
   const [cervezas, setCervezas] = useState([]);
@@ -99,6 +98,7 @@ export function ListaCervezas(props) {
                 {tipo === "Barril-Draft" && (
                   <img
                     src={require("./barril.png")}
+                    alt={"Barril de cerveza"}
                     style={{ height: 30, alignSelf: "center" }}
                   />
                 )}

@@ -1,6 +1,9 @@
 * {
   -webkit-tap-highlight-color: transparent;
 }
+html {
+  scroll-behavior: smooth;
+}
 body {
   min-height: 100%;
   height: auto;
@@ -69,6 +72,7 @@ body {
 }
 .beer-card .title {
   font-family: "Staatliches", cursive;
+  mix-blend-mode: "exclusion";
 }
 
 @media (max-width: 320px) {

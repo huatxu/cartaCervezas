@@ -1,11 +1,21 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Emojione } from "react-emoji-render";
-
-export function Cerveza(props) {
+export const Cerveza = (props) => {
+  const observed = useRef(null);
+  const scrollToRef = (ref) => {
+    if (!props.active)
+      setTimeout(() => {
+        window.scrollTo(0, observed.current.offsetTop);
+      }, 800);
+  };
   return (
     <div
+      ref={observed}
       className={props.active ? "beer-card active" : "beer-card"}
-      onClick={() => props.handleClick(props.info.nombre)}>
+      onClick={() => {
+        props.handleClick(props.info.nombre);
+        scrollToRef(observed);
+      }}>
       <div style={{ flex: 1, flexDirection: "row" }} className='content'>
         <h2 className='title'>{props.info.nombre}</h2>
         <p style={{ display: "inline" }}>{props.info.estilo}</p>
@@ -257,4 +267,4 @@ export function Cerveza(props) {
       )}
     </div>
   );
-}
+};
