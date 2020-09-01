@@ -3,7 +3,7 @@ import { Emojione } from "react-emoji-render";
 
 export function FiltroCervezas(props) {
   return (
-    <div style={{ margin: 20 }}>
+    <div style={{ margin: 10 }}>
       <span
         style={
           !props.artesanales
