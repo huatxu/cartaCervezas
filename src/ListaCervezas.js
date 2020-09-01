@@ -170,7 +170,7 @@ export function ListaCervezas(props) {
               color: "#fff",
               fontFamily: "Staatliches, sans-serif",
               fontSize: 28,
-              marginBottom: 10,
+              marginBottom: "0px",
               marginTop: 20,
               borderBottom: "3px dashed rgba(0, 0, 0, 0.3)",
               minWidth: "150px",
