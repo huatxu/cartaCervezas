@@ -4,9 +4,10 @@ export const Cerveza = (props) => {
   const observed = useRef(null);
   const scrollToRef = (ref) => {
     if (!props.active)
-      setTimeout(() => {
-        window.scrollTo(0, observed.current.offsetTop);
-      }, 800);
+      window.setTimeout(
+        () => window.scrollTo(0, observed.current.offsetTop),
+        100
+      );
   };
   return (
     <div
@@ -18,7 +19,9 @@ export const Cerveza = (props) => {
       }}>
       <div style={{ flex: 1, flexDirection: "row" }} className='content'>
         <h2 className='title'>{props.info.nombre}</h2>
-        <p style={{ display: "inline" }}>{props.info.estilo}</p>
+        <p style={{ display: "inline", lineHeight: "15px" }}>
+          {props.info.estilo}
+        </p>
         <p>
           <Emojione
             text={props.ingles ? props.info.paísingles : props.info.país}
@@ -30,6 +33,7 @@ export const Cerveza = (props) => {
               {props.info.alcohol && "Alcohol "}
               {props.info.alcohol}
             </p>
+
             <p>
               <span style={{ fontWeight: "bold" }}>{props.info.precio} </span>
               <span style={{ color: "grey", fontSize: "85%" }}>
@@ -37,6 +41,18 @@ export const Cerveza = (props) => {
                   ? props.info.formato.trim().split("-")[0]
                   : props.info.formato.trim().split("-")[1]}
               </span>
+            </p>
+            <p
+              style={{
+                textAlign: "center",
+                position: "relative",
+                zIndex: 10,
+                width: "100%",
+                opacity: 0.8,
+                bottom: 15,
+                fontWeight: "bold",
+              }}>
+              + info
             </p>
           </>
         )}
@@ -107,6 +123,9 @@ export const Cerveza = (props) => {
                     ? "Notas"
                     : props.info.descripcioningles && "Description"}
                 </p>
+                {props.info.singluten === "Sí" && (
+                  <p>{!props.ingles ? "Sin gluten" : "Gluten Free"}</p>
+                )}
                 <p
                   style={{
                     lineHeight: "1.5em",
@@ -264,6 +283,13 @@ export const Cerveza = (props) => {
             </>
           )}
         </>
+      )}
+      {props.active && (
+        <p style={{ fontSize: 12, textAlign: "center" }}>
+          {!props.info.ingles
+            ? "+0,30€ suplemento en terraza"
+            : "+0,30€ outside extra"}
+        </p>
       )}
     </div>
   );

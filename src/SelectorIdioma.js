@@ -38,7 +38,7 @@ export function SelectorIdioma(props) {
             fontSize: 15,
             marginTop: 7,
           }}>
-          <Emojione text='🌍' />
+          <Emojione text='🇬🇧' />
         </span>
       )}
     </div>

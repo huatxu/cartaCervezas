@@ -127,7 +127,7 @@ export function ListaCervezas(props) {
                 marginTop: 20,
                 borderBottom: "3px dashed rgba(0, 0, 0, 0.3)",
               }}>
-              Today we suggest
+              Suggestion of the week
             </h2>
           ) : (
             <h2
@@ -140,7 +140,7 @@ export function ListaCervezas(props) {
                 minWidth: "150px",
                 borderBottom: "3px dashed rgba(0, 0, 0, 0.3)",
               }}>
-              Hoy te recomendamos
+              Recomendación de la semana
             </h2>
           )}
 
