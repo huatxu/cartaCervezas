@@ -52,6 +52,7 @@ body {
   line-height: 5px;
   text-align: left;
   max-height: 110px;
+  height: auto;
   position: relative;
   -webkit-transition: all 0.5s ease-in-out;
   -moz-transition: all 0.5s ease-in-out;

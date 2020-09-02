@@ -208,7 +208,6 @@ export const Cerveza = (props) => {
                     style={{
                       lineBreak: 5,
                       flex: "1 1 0px",
-                      borderRight: "1px solid rgba(0, 0, 0, 0.3)",
                       padding: 5,
                     }}>
                     <p
@@ -238,6 +237,7 @@ export const Cerveza = (props) => {
                       lineBreak: 5,
                       flex: "1 1 0px",
                       padding: 5,
+                      borderLeft: "1px solid rgba(0, 0, 0, 0.3)",
                     }}>
                     <p
                       style={{
