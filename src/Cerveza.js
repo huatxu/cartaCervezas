@@ -177,7 +177,8 @@ export const Cerveza = (props) => {
                   flex: 1,
                 }}>
                 <p style={{ fontWeight: "bold", fontSize: "14px" }}>
-                  {props.info.disponible === "Sí" ? (
+                  {props.info.disponible.toLowerCase().replace("í", "i") ===
+                  "si" ? (
                     <span style={{ color: "#00BC29" }}>
                       {!props.ingles ? "Disponible" : "Available"}
                     </span>
@@ -286,7 +287,7 @@ export const Cerveza = (props) => {
       )}
       {props.active && (
         <p style={{ fontSize: 12, textAlign: "center" }}>
-          {!props.info.ingles
+          {!props.ingles
             ? "+0,30€ suplemento en terraza"
             : "+0,30€ outside extra"}
         </p>
