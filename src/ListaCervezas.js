@@ -107,7 +107,8 @@ export function ListaCervezas(props) {
         )}
       </div>
       {((categoriaSeleccionada === "" &&
-        cervezas.filter((e) => e.recomendada !== "No").length > 0) ||
+        cervezas.filter((e) => e.recomendada.toLowerCase() !== "no").length >
+          0) ||
         cervezas
           .filter((e) => e.tipo === categoriaSeleccionada)
           .filter(
@@ -145,7 +146,7 @@ export function ListaCervezas(props) {
           )}
 
           {cervezas
-            .filter((e) => e.recomendada !== "No")
+            .filter((e) => e.recomendada.toLowerCase() !== "no")
             .map((y) => (
               <Cerveza
                 key={y.nombre}
