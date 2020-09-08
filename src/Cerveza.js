@@ -147,7 +147,8 @@ export const Cerveza = (props) => {
                 justifyContent: "space-between",
               }}>
               <p style={{ fontWeight: "bold", fontSize: "14px" }}>
-                {props.info.disponible === "Sí" ? (
+                {props.info.disponible.replace("í", "i").toLowerCase() ===
+                "si" ? (
                   <span style={{ color: "#00BC29" }}>
                     {!props.ingles ? "Disponible" : "Available"}
                   </span>
