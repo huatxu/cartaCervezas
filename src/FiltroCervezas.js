@@ -31,9 +31,7 @@ export function FiltroCervezas(props) {
               }
         }
         onClick={() => props.handleClick(false)}>
-        <Emojione
-          text={props.ingles ? "🔩 Mass produced" : "🔩 Industriales"}
-        />
+        <Emojione text={props.ingles ? "Mass produced" : "Industriales"} />
       </span>
 
       <span
@@ -63,7 +61,7 @@ export function FiltroCervezas(props) {
               }
         }
         onClick={() => props.handleClick(true)}>
-        <Emojione text={props.ingles ? "Craft 🔨" : "Artesanales 🔨"} />
+        <Emojione text={props.ingles ? "Craft" : "Artesanales"} />
       </span>
     </div>
   );

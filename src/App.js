@@ -20,7 +20,7 @@ function App() {
             marginBottom: 0,
             marginTop: 20,
           }}>
-          Carta de cervezas
+          {ingles ? "Beer menu" : "Carta de cervezas"}
         </h2>
       </header>
       <SelectorIdioma handleClick={setIngles} ingles={ingles} />

@@ -287,7 +287,7 @@ export const Cerveza = (props) => {
         </>
       )}
       {props.active && (
-        <p style={{ fontSize: 12, textAlign: "center" }}>
+        <p style={{ fontSize: 11, textAlign: "right" }}>
           {!props.ingles
             ? "+0,30€ suplemento en terraza"
             : "+0,30€ outside extra"}
