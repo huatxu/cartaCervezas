@@ -51,7 +51,6 @@ body {
   padding: 10px;
   line-height: 5px;
   text-align: left;
-  max-height: 120px;
   height: auto;
   position: relative;
   /* -webkit-transition: all 0.5s ease-in-out;
@@ -96,12 +95,21 @@ body {
 .App-link {
   color: #61dafb;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.main-title {
+  color: #fff;
+  font-family: Staatliches, sans-serif;
+  font-size: 35px;
+  margin-bottom: 0;
+  margin-top: 20px;
 }
+.footer {
+    color: white;
+    font-size: 11;
+    line-break: 0;
+    justify-self: flex-end;
+    flex: 1;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin-top: 20px;
+  }
+
