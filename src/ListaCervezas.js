@@ -3,12 +3,42 @@ import GetSheetDone from "get-sheet-done";
 import { Cerveza } from "./Cerveza";
 
 export function ListaCervezas(props) {
+  const {ingles} = props
   const [cervezas, setCervezas] = useState([]);
-  const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("");
+  const [title, setTitle] = useState('')
+  const [title2, setTitle2] = useState('')
+  const getTitle1 = () => {
+    const splitted = title.split('-')
+    return ingles ? splitted[1] : splitted[0]
+  }
+  const getTitle2 = () => {
+    const splitted = title2.split('-')
+    return ingles ? splitted[1] : splitted[0]
+  }
   useEffect(() => {
     const recopilarDatos = async () => {
       GetSheetDone.labeledCols(
-        "1EB7Ad7Swi82Ks0gjJPcpoNpTq7ZAdphTubOOlxmdSOg"
+        "1EB7Ad7Swi82Ks0gjJPcpoNpTq7ZAdphTubOOlxmdSOg",
+        2
+      ).then((sheet) => {
+        if (sheet.data[0]['titulo1'])
+        setTitle(sheet.data[0]['titulo1'])
+        if(sheet.data[0]['titulo2'])
+          setTitle2(sheet.data[0]['titulo2'])
+      }).catch(() => {
+        GetSheetDone.labeledCols(
+          "1s8qj2Zs0mbrgha6AlwQ1SRbNd6sOW-nUhi2ZBsT5Yxk",
+          2
+        ).then((sheet) => {
+          if (sheet.data[0]['titulo1'])
+          setTitle(sheet.data[0]['titulo1'])
+          if(sheet.data[0]['titulo2'])
+            setTitle2(sheet.data[0]['titulo2'])
+        })
+      })
+      GetSheetDone.labeledCols(
+        "1EB7Ad7Swi82Ks0gjJPcpoNpTq7ZAdphTubOOlxmdSOg",
+        1
       ).then((sheet) => {
         setCervezas(
           sheet.data.map((e) => {
@@ -16,6 +46,17 @@ export function ListaCervezas(props) {
             return e;
           })
         );
+      }).catch(() => {
+        GetSheetDone.labeledCols(
+          "1s8qj2Zs0mbrgha6AlwQ1SRbNd6sOW-nUhi2ZBsT5Yxk"
+        ).then((sheet) => {
+          setCervezas(
+            sheet.data.map((e) => {
+              e.active = false;
+              return e;
+            })
+          );
+        })
       });
     };
     recopilarDatos();
@@ -30,179 +71,20 @@ export function ListaCervezas(props) {
       })
     );
   };
-  const handleCategoryClick = (categoria) => {
-    categoriaSeleccionada === categoria
-      ? setCategoriaSeleccionada("")
-      : setCategoriaSeleccionada(categoria);
-  };
-  const tiposDeCerveza = [...new Set(cervezas.map((e) => e.tipo))];
   return (
     <>
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          maxWidth: "100%",
-          justifyContent: "center",
-        }}>
-        {tiposDeCerveza.map(
-          (tipo) =>
-            cervezas
-              .filter((e) => e.tipo === tipo)
-              .filter(
-                (e) =>
-                  (e.artesanal !== "No" && props.artesanales) ||
-                  (e.artesanal === "No" && !props.artesanales)
-              ).length > 0 && (
-              <h2
-                style={
-                  tipo === categoriaSeleccionada
-                    ? {
-                        display: "flex",
-                        color: "#fff",
-                        fontFamily: "Staatliches, sans-serif",
-                        fontSize: 23,
-                        marginBottom: 0,
-                        marginTop: 20,
-                        backgroundColor: "rgba(110, 110, 110, 1)",
-                        lineHeight: 1.5,
-                        margin: 4,
-                        paddingLeft: 10,
-                        paddingRight: tipo === "Barril-Draft" ? 0 : 10,
-                        borderRadius: 5,
-                        justifyContent: "center",
-                      }
-                    : {
-                        display: "flex",
-                        color: "#fff",
-                        fontFamily: "Staatliches, sans-serif",
-                        fontSize: 23,
-                        marginBottom: 0,
-                        marginTop: 20,
-                        backgroundColor: "rgba(64, 64, 64, 1)",
-                        lineHeight: 1.5,
-                        margin: 4,
-                        paddingLeft: 10,
-                        paddingRight: tipo === "Barril-Draft" ? 0 : 10,
-                        borderRadius: 5,
-                        cursor: "pointer",
-                      }
-                }
-                onClick={() => handleCategoryClick(tipo)}
-                key={tipo}>
-                {tipo && tipo.split("-").length > 1
-                  ? !props.ingles
-                    ? tipo.split("-")[0].trim()
-                    : tipo.split("-")[1].trim()
-                  : tipo.trim()}
-                {tipo === "Barril-Draft" && (
-                  <img
-                    src={require("./barril.png")}
-                    alt={"Barril de cerveza"}
-                    style={{ height: 30, alignSelf: "center" }}
-                  />
-                )}
-              </h2>
-            )
-        )}
-      </div>
-      {((categoriaSeleccionada === "" &&
-        cervezas.filter((e) => e.recomendada.toLowerCase() !== "no").length >
-          0) ||
-        cervezas
-          .filter((e) => e.tipo === categoriaSeleccionada)
-          .filter(
-            (e) =>
-              (e.artesanal !== "No" && props.artesanales) ||
-              (e.artesanal === "No" && !props.artesanales)
-          ).length === 0) && (
-        <>
-          {props.ingles ? (
-            <h2
-              style={{
-                color: "#fff",
-                fontFamily: "Staatliches, sans-serif",
-                fontSize: 28,
-                marginBottom: 0,
-                minWidth: "150px",
-                marginTop: 20,
-                borderBottom: "3px dashed rgba(0, 0, 0, 0.3)",
-              }}>
-              Suggestion of the week
-            </h2>
-          ) : (
-            <h2
-              style={{
-                color: "#fff",
-                fontFamily: "Staatliches, sans-serif",
-                fontSize: 28,
-                marginBottom: 0,
-                marginTop: 20,
-                minWidth: "150px",
-                borderBottom: "3px dashed rgba(0, 0, 0, 0.3)",
-              }}>
-              Recomendación de la semana
-            </h2>
-          )}
-
+     {getTitle1() && <h2 className={'main-title'} style={{fontSize:20}}>{getTitle1()}</h2>}
+      {getTitle2() && <h2 className={'main-title'} style={{fontSize:20}}>{getTitle2()}</h2>}
           {cervezas
-            .filter((e) => e.recomendada.toLowerCase() !== "no")
             .map((y) => (
               <Cerveza
                 key={y.nombre}
                 info={y}
                 active={y.active}
-                ingles={props.ingles}
+                ingles={ingles}
                 handleClick={handleClick}
               />
             ))}
         </>
-      )}
-      {categoriaSeleccionada !== "" &&
-        cervezas
-          .filter((e) => e.tipo === categoriaSeleccionada)
-          .filter(
-            (e) =>
-              (e.artesanal !== "No" && props.artesanales) ||
-              (e.artesanal === "No" && !props.artesanales)
-          ).length > 0 && (
-          <h2
-            style={{
-              color: "#fff",
-              fontFamily: "Staatliches, sans-serif",
-              fontSize: 28,
-              marginBottom: "0px",
-              marginTop: 20,
-              borderBottom: "3px dashed rgba(0, 0, 0, 0.3)",
-              minWidth: "150px",
-            }}>
-            {props.ingles
-              ? categoriaSeleccionada.split("-")[1].trim()
-              : categoriaSeleccionada.split("-")[0].trim()}
-          </h2>
-        )}
-      {tiposDeCerveza.map((tipo) => {
-        return cervezas
-          .filter((e) => e.tipo === tipo)
-          .filter(
-            (e) =>
-              (e.artesanal !== "No" && props.artesanales) ||
-              (e.artesanal === "No" && !props.artesanales) ||
-              categoriaSeleccionada === "Barril"
-          )
-          .filter((e) => categoriaSeleccionada === tipo)
-          .map((y) => {
-            return (
-              <Cerveza
-                key={y.nombre + y.tipo}
-                info={y}
-                active={y.active}
-                ingles={props.ingles}
-                handleClick={handleClick}
-              />
-            );
-          });
-      })}
-    </>
   );
 }
