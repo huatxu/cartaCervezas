@@ -1,45 +1,64 @@
 import React, { useRef } from "react";
 import { Emojione } from "react-emoji-render";
 export const Cerveza = (props) => {
+  const { active, info, ingles } = props
+  const { artesanal, tipo, alcohol } = info
   const observed = useRef(null);
   const scrollToRef = (ref) => {
-    if (!props.active)
+    if (!active)
       window.setTimeout(
         () => window.scrollTo(0, observed.current.offsetTop),
         100
       );
   };
+  const getManufacture = () => {
+      return ingles ? 'Craft' : 'Artesana'
+  }
+  const isCraft = () => {
+    return ['Sí', 'si', 'SI', 'S', 'sí', 1, true, 'SÍ'].indexOf(artesanal) >= 0
+  }
+  const getType = () => {
+    const type = tipo.split('-')
+    return ingles ? type[1] : type[0]
+  }
   return (
     <div
       ref={observed}
-      className={props.active ? "beer-card active" : "beer-card"}
+      className={active ? "beer-card active" : "beer-card"}
       onClick={() => {
-        props.handleClick(props.info.nombre);
+        props.handleClick(info.nombre);
         scrollToRef(observed);
       }}>
       <div style={{ flex: 1, flexDirection: "row" }} className='content'>
-        <h2 className='title'>{props.info.nombre}</h2>
+        <h2 className='title'>{info.nombre}</h2>
+        {isCraft() && 
+        <p style={{ fontWeight: 'bold' }}>
+          {getManufacture()}
+        </p>}
         <p style={{ display: "inline", lineHeight: "15px" }}>
-          {props.info.estilo}
+          {info.estilo} 
+        </p>
+        <p style={{ }}>
+         {getType()}
         </p>
         <p>
           <Emojione
-            text={props.ingles ? props.info.paísingles : props.info.país}
+            text={ingles ? info.paísingles : info.país}
           />
         </p>
-        {!props.active && (
+        {!active && (
           <>
             <p>
-              {props.info.alcohol && "Alcohol "}
-              {props.info.alcohol}
+              {alcohol && "Alcohol "}
+              {alcohol}
             </p>
 
             <p>
-              <span style={{ fontWeight: "bold" }}>{props.info.precio} </span>
+              <span style={{ fontWeight: "bold" }}>{info.precio} </span>
               <span style={{ color: "grey", fontSize: "85%" }}>
-                {props.info.formato && !props.ingles
-                  ? props.info.formato.trim().split("-")[0]
-                  : props.info.formato.trim().split("-")[1]}
+                {info.formato && !ingles
+                  ? info.formato.trim().split("-")[0]
+                  : info.formato.trim().split("-")[1]}
               </span>
             </p>
             <p
@@ -48,8 +67,7 @@ export const Cerveza = (props) => {
                 position: "relative",
                 zIndex: 10,
                 width: "100%",
-                opacity: 0.8,
-                bottom: 15,
+                opacity: 0.7,
                 fontWeight: "bold",
               }}>
               + info
@@ -58,7 +76,7 @@ export const Cerveza = (props) => {
         )}
       </div>
 
-      {props.active && (
+      {active && (
         <>
           <div
             style={{
@@ -67,26 +85,26 @@ export const Cerveza = (props) => {
               justifyContent: "space-between",
               lineHeight: "15px",
             }}>
-            {props.info.alcohol && (
+            {alcohol && (
               <p>
                 <span style={{ fontWeight: "bold" }}>Alcohol </span>
-                {props.info.alcohol}
+                {alcohol}
               </p>
             )}
-            {props.info.color && (
+            {info.color && (
               <p>
                 <span style={{ fontWeight: "bold" }}>
-                  {!props.ingles ? "Color" : "Colour"}
+                  {!ingles ? "Color" : "Colour"}
                 </span>{" "}
-                {props.info.color}
+                {info.color}
               </p>
             )}
-            {props.info.amargor && (
+            {info.amargor && (
               <p>
                 <span style={{ fontWeight: "bold" }}>
-                  {!props.ingles ? "Amargor" : "Bitterness"}
+                  {!ingles ? "Amargor" : "Bitterness"}
                 </span>{" "}
-                {props.info.amargor}
+                {info.amargor}
               </p>
             )}
           </div>
@@ -94,9 +112,9 @@ export const Cerveza = (props) => {
       )}
       <div
         style={
-          !props.active
+          !active
             ? {
-                backgroundImage: "url(" + props.info.imagen + ")",
+                backgroundImage: "url(" + info.imagen + ")",
                 backgroundSize: "200px 200px",
                 height: 200,
                 width: 200,
@@ -105,7 +123,7 @@ export const Cerveza = (props) => {
                 position: "absolute",
               }
             : {
-                backgroundImage: "url(" + props.info.imagen + ")",
+                backgroundImage: "url(" + info.imagen + ")",
                 backgroundSize: "200px 200px",
                 height: 200,
                 width: 200,
@@ -113,18 +131,18 @@ export const Cerveza = (props) => {
                 margin: "0px auto",
               }
         }></div>
-      {props.active && (
+      {active && (
         <>
           <div style={{ lineHeight: "15px", textAlign: "center" }}>
-            {props.info.descripcion && (
+            {info.descripcion && (
               <div>
                 <p style={{ fontWeight: "bold" }}>
-                  {!props.ingles
+                  {!ingles
                     ? "Notas"
-                    : props.info.descripcioningles && "Description"}
+                    : info.descripcioningles && "Description"}
                 </p>
-                {props.info.singluten === "Sí" && (
-                  <p>{!props.ingles ? "Sin gluten" : "Gluten Free"}</p>
+                {info.singluten === "Sí" && (
+                  <p>{!ingles ? "Sin gluten" : "Gluten Free"}</p>
                 )}
                 <p
                   style={{
@@ -132,14 +150,14 @@ export const Cerveza = (props) => {
                     marginRight: 15,
                     marginLeft: 15,
                   }}>
-                  {!props.ingles
-                    ? props.info.descripcion
-                    : props.info.descripcioningles}
+                  {!ingles
+                    ? info.descripcion
+                    : info.descripcioningles}
                 </p>
               </div>
             )}
           </div>
-          {!props.info.formato2 ? (
+          {!info.formato2 ? (
             <div
               style={{
                 display: "flex",
@@ -147,25 +165,25 @@ export const Cerveza = (props) => {
                 justifyContent: "space-between",
               }}>
               <p style={{ fontWeight: "bold", fontSize: "14px" }}>
-                {props.info.disponible.replace("í", "i").toLowerCase() ===
+                {info.disponible.replace("í", "i").toLowerCase() ===
                 "si" ? (
                   <span style={{ color: "#00BC29" }}>
-                    {!props.ingles ? "Disponible" : "Available"}
+                    {!ingles ? "Disponible" : "Available"}
                   </span>
                 ) : (
                   <span style={{ color: "#B10D0D" }}>
-                    {!props.ingles ? "Agotada" : "Unavailable"}
+                    {!ingles ? "Agotada" : "Unavailable"}
                   </span>
                 )}
               </p>
               <p>
                 <span style={{ fontWeight: "bold", fontSize: "14px" }}>
-                  {props.info.precio}{" "}
+                  {info.precio}{" "}
                 </span>
                 <span style={{ color: "grey", fontSize: "85%" }}>
-                  {props.info.formato && !props.ingles
-                    ? props.info.formato.trim().split("-")[0]
-                    : props.info.formato.trim().split("-")[1]}
+                  {info.formato && !ingles
+                    ? info.formato.trim().split("-")[0]
+                    : info.formato.trim().split("-")[1]}
                 </span>
               </p>
             </div>
@@ -178,14 +196,14 @@ export const Cerveza = (props) => {
                   flex: 1,
                 }}>
                 <p style={{ fontWeight: "bold", fontSize: "14px" }}>
-                  {props.info.disponible.toLowerCase().replace("í", "i") ===
+                  {info.disponible.toLowerCase().replace("í", "i") ===
                   "si" ? (
                     <span style={{ color: "#00BC29" }}>
-                      {!props.ingles ? "Disponible" : "Available"}
+                      {!ingles ? "Disponible" : "Available"}
                     </span>
                   ) : (
                     <span style={{ color: "#B10D0D" }}>
-                      {!props.ingles ? "Agotada" : "Unavailable"}
+                      {!ingles ? "Agotada" : "Unavailable"}
                     </span>
                   )}
                 </p>
@@ -211,7 +229,7 @@ export const Cerveza = (props) => {
                       fontSize: "14px",
                       textAlign: "center",
                     }}>
-                    {props.info.precio}
+                    {info.precio}
                   </p>
                   <p
                     style={{
@@ -219,12 +237,12 @@ export const Cerveza = (props) => {
                       fontSize: 11,
                       lineHeight: 1,
                     }}>
-                    {props.info.formato && !props.ingles
-                      ? props.info.formato.trim().split("-")[0]
-                      : props.info.formato.trim().split("-")[1]}
+                    {info.formato && !ingles
+                      ? info.formato.trim().split("-")[0]
+                      : info.formato.trim().split("-")[1]}
                   </p>
                 </div>
-                {props.info.formato2 && (
+                {info.formato2 && (
                   <div
                     style={{
                       lineBreak: 5,
@@ -237,7 +255,7 @@ export const Cerveza = (props) => {
                         fontSize: "14px",
                         textAlign: "center",
                       }}>
-                      {props.info.precio2}
+                      {info.precio2}
                     </p>
                     <p
                       style={{
@@ -246,13 +264,13 @@ export const Cerveza = (props) => {
                         textAlign: "center",
                         lineHeight: 1,
                       }}>
-                      {props.info.formato2 && !props.ingles
-                        ? props.info.formato2.trim().split("-")[0]
-                        : props.info.formato2.trim().split("-")[1]}
+                      {info.formato2 && !ingles
+                        ? info.formato2.trim().split("-")[0]
+                        : info.formato2.trim().split("-")[1]}
                     </p>
                   </div>
                 )}
-                {props.info.formato3 && (
+                {info.formato3 && (
                   <div
                     style={{
                       lineBreak: 5,
@@ -266,7 +284,7 @@ export const Cerveza = (props) => {
                         fontSize: "14px",
                         textAlign: "center",
                       }}>
-                      {props.info.precio3}
+                      {info.precio3}
                     </p>
                     <p
                       style={{
@@ -275,9 +293,9 @@ export const Cerveza = (props) => {
                         textAlign: "center",
                         lineHeight: 1,
                       }}>
-                      {props.info.formato3 && !props.ingles
-                        ? props.info.formato3.trim().split("-")[0]
-                        : props.info.formato3.trim().split("-")[1]}
+                      {info.formato3 && !ingles
+                        ? info.formato3.trim().split("-")[0]
+                        : info.formato3.trim().split("-")[1]}
                     </p>
                   </div>
                 )}
@@ -286,9 +304,9 @@ export const Cerveza = (props) => {
           )}
         </>
       )}
-      {props.active && (
+      {active && (
         <p style={{ fontSize: 11, textAlign: "right" }}>
-          {!props.ingles
+          {!ingles
             ? "+0,30€ suplemento en terraza"
             : "+0,30€ outside extra"}
         </p>
