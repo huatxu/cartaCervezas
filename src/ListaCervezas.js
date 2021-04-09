@@ -7,6 +7,7 @@ export function ListaCervezas(props) {
   const [cervezas, setCervezas] = useState([]);
   const [title, setTitle] = useState('')
   const [title2, setTitle2] = useState('')
+
   const getTitle1 = () => {
     const splitted = title.split('-')
     return ingles ? splitted[1] : splitted[0]
@@ -17,8 +18,9 @@ export function ListaCervezas(props) {
   }
   useEffect(() => {
     const recopilarDatos = async () => {
+      const fallBack = '1EB7Ad7Swi82Ks0gjJPcpoNpTq7ZAdphTubOOlxmdSOg'
       GetSheetDone.labeledCols(
-        "1EB7Ad7Swi82Ks0gjJPcpoNpTq7ZAdphTubOOlxmdSOg",
+        process.env.REACT_APP_MAIN_UID || fallBack,
         2
       ).then((sheet) => {
         if (sheet.data[0]['titulo1'])
@@ -27,7 +29,7 @@ export function ListaCervezas(props) {
           setTitle2(sheet.data[0]['titulo2'])
       }).catch(() => {
         GetSheetDone.labeledCols(
-          "1s8qj2Zs0mbrgha6AlwQ1SRbNd6sOW-nUhi2ZBsT5Yxk",
+          process.env.REACT_APP_SECONDARY_UID || fallBack,
           2
         ).then((sheet) => {
           if (sheet.data[0]['titulo1'])
@@ -37,7 +39,7 @@ export function ListaCervezas(props) {
         })
       })
       GetSheetDone.labeledCols(
-        "1EB7Ad7Swi82Ks0gjJPcpoNpTq7ZAdphTubOOlxmdSOg",
+        process.env.REACT_APP_MAIN_UID || fallBack,
         1
       ).then((sheet) => {
         setCervezas(
@@ -48,7 +50,7 @@ export function ListaCervezas(props) {
         );
       }).catch(() => {
         GetSheetDone.labeledCols(
-          "1s8qj2Zs0mbrgha6AlwQ1SRbNd6sOW-nUhi2ZBsT5Yxk"
+          process.env.REACT_APP_SECONDARY_UID || fallBack
         ).then((sheet) => {
           setCervezas(
             sheet.data.map((e) => {
