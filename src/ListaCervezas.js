@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import GetSheetDone from "get-sheet-done";
 import { Cerveza } from "./Cerveza";
 
+const trueChoices = ['SÍ', 'si', 'sí', 'Si', 'SI', 'sI', 'sÍ', 'Sí']
+
 export function ListaCervezas(props) {
   const {ingles} = props
   const [cervezas, setCervezas] = useState([]);
@@ -43,7 +45,9 @@ export function ListaCervezas(props) {
         1
       ).then((sheet) => {
         setCervezas(
-          sheet.data.map((e) => {
+          sheet.data.filter((e) => {
+            return trueChoices.indexOf(e.aparece) >= 0
+          }).map((e) => {
             e.active = false;
             return e;
           })
