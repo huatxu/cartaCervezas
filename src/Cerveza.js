@@ -69,8 +69,16 @@ export const Cerveza = (props) => {
                 width: "100%",
                 opacity: 0.7,
                 fontWeight: "bold",
+                fontSize: "0.8em"
               }}>
-              + info
+                <span
+                  style={{
+                    backgroundColor: "#101010",
+                    color: 'white',
+                    padding: "4px 7px",
+                    borderRadius: 4,
+                  }}
+                >+ INFO</span>
             </p>
           </>
         )}
