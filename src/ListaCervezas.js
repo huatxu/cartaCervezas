@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import GetSheetDone from "get-sheet-done";
 import { Cerveza } from "./Cerveza";
+import { Menu } from "./Menu"
 
 const trueChoices = ['SÍ', 'si', 'sí', 'Si', 'SI', 'sI', 'sÍ', 'Sí']
 
@@ -9,6 +10,7 @@ export function ListaCervezas(props) {
   const [cervezas, setCervezas] = useState([]);
   const [title, setTitle] = useState('')
   const [title2, setTitle2] = useState('')
+  const [barril, setBarril] = useState(true)
 
   const getTitle1 = () => {
     const splitted = title.split('-')
@@ -67,7 +69,7 @@ export function ListaCervezas(props) {
     };
     recopilarDatos();
   }, []);
-
+  
   const handleClick = (e) => {
     setCervezas(
       cervezas.map((y) => {
@@ -81,7 +83,13 @@ export function ListaCervezas(props) {
     <>
      {getTitle1() && <h2 className={'main-title'} style={{fontSize:20}}>{getTitle1()}</h2>}
       {getTitle2() && <h2 className={'main-title'} style={{fontSize:20}}>{getTitle2()}</h2>}
-          {cervezas
+          <Menu barril={barril} handleClick={setBarril}></Menu>
+          {cervezas.filter((y) => {
+            if (barril)
+              return trueChoices.indexOf(y['barril']) >= 0
+            else
+              return trueChoices.indexOf(y['barril']) < 0
+          })
             .map((y) => (
               <Cerveza
                 key={y.nombre}
